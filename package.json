@@ -15,7 +15,7 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-  "build": "npm run build-prod"
+  "build": "npm run build"
   }
 
 }
