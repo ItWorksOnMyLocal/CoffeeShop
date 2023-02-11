@@ -7,9 +7,9 @@
 	"author": "",
 	"license": "ISC",
 	"scripts": {
-		"build": "npm run build:client && npm run build:server",
-		"build:client": "cd client && npm run build",
-		"build:server": "cd server && npm run build"
+		"build": "npm run build:ClientApp && npm run build:Server",
+		"build:ClientApp": "cd ClientApp && npm run build",
+		"build:Server": "cd Server && npm run build"
 	},
 	"dependencies": {
 		"mongodb": "^5.0.1",
