@@ -7,9 +7,6 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
-    "dev": "npm run start:client & npm run start:server",
-    "start:client": "cd client && npm run start",
-    "start:server": "cd server && npm run start"
   },
   "keywords": [],
   "author": "",
