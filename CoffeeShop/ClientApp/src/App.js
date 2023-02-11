@@ -1,22 +1,32 @@
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
-import { Layout } from './components/Layout';
-import './custom.css';
+import './App.css';
 
-export default class App extends Component {
-  static displayName = App.name;
+// import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
+import OrderForm from './components/OrderForm';
+import OrderList from './components/OrderList';
 
-  render() {
+function App() {
     return (
-      <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { element, ...rest } = route;
-            return <Route key={index} {...rest} element={element} />;
-          })}
-        </Routes>
-      </Layout>
+        <div>
+            <h1>Coffee Ordering App</h1>
+            <OrderList />
+        </div>
     );
-  }
 }
+
+function Main() {
+
+    return (
+        <div className="Main">
+            <OrderForm />
+            <OrderList />
+        </div>
+    );
+}
+ReactDOM.render(
+    <Main />,
+    document.getElementById('root')
+);
+export default Main;

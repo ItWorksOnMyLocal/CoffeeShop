@@ -1,55 +1,46 @@
 ﻿import React, { useState } from 'react';
+import axios from 'axios';
 
-function OrderForm() {
-    const [name, setName] = useState('');
-    const [coffee, setCoffee] = useState('');
+const OrderForm = () => {
+    const [order, setOrder] = useState({
+        type: '',
+        name: '',
+    });
+
+    const handleChange = (event) => {
+        setOrder({
+            ...order,
+            [event.target.name]: event.target.value
+        });
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        // send the order details to the server
-        fetch('https://localhost:3000/orders', {
-            method: 'POST',
-            body: JSON.stringify({ name, coffee }),
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.error('Error:', error));
-
-        // firebase.firestore().collection('orders').add({
-        //     name,
-        //     coffee
-        // });
+        axios.post('http://localhost:44495/api/orders', order)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                />
-            </label>
-
-            <label>
-                Coffee:
-                <select value={coffee} onChange={(event) => setCoffee(event.target.value)}>
-                    <option value="">Select a coffee</option>
-                    <option value="standard">Standard</option>
+            <div>
+                <label htmlFor="type">Type of Coffee:</label>
+                <select id="type" name="type" onChange={handleChange}>
+                    <option value=""></option>
+                    <option value="latte">Latte</option>
                     <option value="cappuccino">Cappuccino</option>
-                    <option value="americano">Americano</option>
-                    <option value="cortado">Cortado</option>
                     <option value="espresso">Espresso</option>
-                    <option value="ice-coffee">Ice Coffee</option>
                 </select>
-            </label>
-
+            </div>
+            <div>
+                <label htmlFor="name">Name:</label>
+                <input type="text" id="name" name="name" onChange={handleChange} />
+            </div>
             <button type="submit">Submit Order</button>
         </form>
     );
-}
+};
 
 export default OrderForm;
